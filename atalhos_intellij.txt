@@ -1,8 +1,0 @@
-shift + F6 : rescrever todas as ocorrências de algo
-ctrl + alt + I : identar certinho todo o código
-ctrl + / : comentar linha de código
-ctrl + shift + / : comentar bloco de código
-alt + insert : abre menu de opções a serem geradas na classe (getters, construtores...)
-alt + enter : sugere adições/ alterações em uma linha de código
-(segurar)ctrl + (clique em método/atributo) : navega até a classe onde o método/atributo está declarado
-ctrl + alt + O : remove imports que não são utilizados na classe
