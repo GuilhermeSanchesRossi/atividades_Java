@@ -1,6 +1,8 @@
 package main;
 
 import models.Employee;
+import util.ComparatorSort;
+import util.PredicateFilter;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -21,10 +23,15 @@ public class Main {
             while(employee != null) {
                 String[] atributos = employee.split(",");
                 Employee emp = new Employee(atributos[0], atributos[1], Double.parseDouble(atributos[2]));
-                System.out.println(emp);
                 employeesList.add(emp);
                 employee = arq.readLine();
             }
+
+            Double salarioMin = 3000.0;
+            List<Employee> newList = employeesList.stream().filter(new PredicateFilter(salarioMin)).
+                    sorted(new ComparatorSort()).toList();
+            newList.forEach(emp -> System.out.println(emp.getEmail()));
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
