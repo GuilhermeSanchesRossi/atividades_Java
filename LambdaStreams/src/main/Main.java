@@ -2,7 +2,8 @@ package main;
 
 import models.Employee;
 import util.ComparatorSort;
-import util.PredicateFilter;
+import util.namePredicate;
+import util.salaryPredicate;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -20,17 +21,25 @@ public class Main {
 
             List<Employee> employeesList = new ArrayList<>();
             String employee = arq.readLine();
-            while(employee != null) {
+            Employee emp;
+            while (employee != null) {
                 String[] atributos = employee.split(",");
-                Employee emp = new Employee(atributos[0], atributos[1], Double.parseDouble(atributos[2]));
+                emp = new Employee(atributos[0], atributos[1], Double.parseDouble(atributos[2]));
                 employeesList.add(emp);
                 employee = arq.readLine();
             }
 
             Double salarioMin = 3000.0;
-            List<Employee> newList = employeesList.stream().filter(new PredicateFilter(salarioMin)).
+            System.out.println("email dos funcionários em ordem alfabética que possuem salário maior que " + salarioMin);
+            List<Employee> newList = employeesList.stream().filter(new salaryPredicate(salarioMin)).
                     sorted(new ComparatorSort()).toList();
-            newList.forEach(emp -> System.out.println(emp.getEmail()));
+            newList.forEach(emp1 -> System.out.println(emp1.getEmail()));
+
+            char charInicial = 'M';
+            System.out.println("soma dos salários dos funcionários cujos nomes começam com " + charInicial);
+            Double accumulatedSalary = employeesList.stream().filter(new namePredicate(charInicial)).
+                    map(e -> e.getSalary()).reduce(0.0, (sal1, sal2) -> sal1+sal2);
+            System.out.println(accumulatedSalary);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

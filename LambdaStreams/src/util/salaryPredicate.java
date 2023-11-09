@@ -4,11 +4,11 @@ import models.Employee;
 
 import java.util.function.Predicate;
 
-public class PredicateFilter implements Predicate<Employee> {
+public class salaryPredicate implements Predicate<Employee> {
 
     public Double criteria;
 
-    public PredicateFilter(Double criteria) {
+    public salaryPredicate(Double criteria) {
         this.criteria = criteria;
     }
 
